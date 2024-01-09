@@ -1,4 +1,4 @@
-.PHONY: tests bench
+.PHONY: tests bench cov
 
 tests:
 	@echo "Running tests..."
@@ -8,4 +8,9 @@ tests:
 bench:
 	@echo "Running benchmarks..."
 	@go test -bench=. ./...
+	@echo "Done."
+
+cov:
+	@echo "Running coverage..."
+	@go test -v -cover ./...
 	@echo "Done."
