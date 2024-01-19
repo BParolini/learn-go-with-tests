@@ -20,7 +20,7 @@ type Line struct {
 	Y2 float64 `xml:"y2,attr"`
 }
 
-type Svg struct {
+type SVG struct {
 	XMLName xml.Name `xml:"svg"`
 	Xmlns   string   `xml:"xmlns,attr"`
 	Width   string   `xml:"width,attr"`
@@ -45,7 +45,7 @@ func TestSVGWriterSecondHand(t *testing.T) {
 			b := bytes.Buffer{}
 			SVGWriter(&b, c.time)
 
-			svg := Svg{}
+			svg := SVG{}
 			err := xml.Unmarshal(b.Bytes(), &svg)
 			if err != nil {
 				t.Fatalf("expected to successfully parse SVG, but got error %v", err)
@@ -60,6 +60,26 @@ func TestSVGWriterSecondHand(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestSVGWriterAtMidnight(t *testing.T) {
+	tm := time.Date(1337, time.January, 1, 0, 0, 0, 0, time.UTC)
+	b := bytes.Buffer{}
+
+	SVGWriter(&b, tm)
+
+	svg := SVG{}
+	xml.Unmarshal(b.Bytes(), &svg)
+
+	want := Line{150, 150, 150, 60}
+
+	for _, line := range svg.Line {
+		if line == want {
+			return
+		}
+	}
+
+	t.Errorf("expected to find the second hand line %+v, in the SVG lines %+v", want, svg.Line)
 }
 
 func containsLine(l Line, ls []Line) bool {
