@@ -12,13 +12,28 @@ type Point struct {
 }
 
 func secondHandPoint(t time.Time) Point {
-	angle := secondsInRadians(t)
-	x := math.Sin(angle)
-	y := math.Cos(angle)
+	return angleToPoint(secondsInRadians(t))
+}
 
-	return Point{x, y}
+func minuteHandPoint(t time.Time) Point {
+	return angleToPoint(minutesInRadians(t))
 }
 
 func secondsInRadians(t time.Time) float64 {
 	return (math.Pi / (30 / float64(t.Second())))
+}
+
+func minutesInRadians(t time.Time) float64 {
+	return (secondsInRadians(t) / 60) + (math.Pi / (30 / float64(t.Minute())))
+}
+
+func hoursInRadians(t time.Time) float64 {
+	return (minutesInRadians(t) / 12) + (math.Pi / (6 / (float64(t.Hour() % 12))))
+}
+
+func angleToPoint(angle float64) Point {
+	x := math.Sin(angle)
+	y := math.Cos(angle)
+
+	return Point{x, y}
 }

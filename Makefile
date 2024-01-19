@@ -23,4 +23,11 @@ build:
 	@go build -o bin/learn-go-with-tests
 	@echo "Done."
 
-.PHONY: tests bench cov vet
+run_clockface: build
+	@echo "Running Clockface..."
+	@bin/learn-go-with-tests clockface
+	@echo
+	@echo "Done."
+
+.PHONY: tests bench cov vet build \
+	run_clockface
