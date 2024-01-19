@@ -5,6 +5,15 @@ import (
 	"time"
 )
 
+const (
+	secondsInHalfClock = 30
+	secondsInClock     = 2 * secondsInHalfClock
+	minutesInHalfClock = 30
+	minutesInClock     = 2 * minutesInHalfClock
+	hoursInHalfClock   = 6
+	hoursInClock       = 2 * hoursInHalfClock
+)
+
 // A Point represents a two-dimensional Cartesian coordinate
 type Point struct {
 	X float64
