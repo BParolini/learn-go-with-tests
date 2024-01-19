@@ -89,7 +89,6 @@ func TestSVGWriterMinuteHand(t *testing.T) {
 	}
 }
 
-/*
 func TestSVGWriterHourHand(t *testing.T) {
 	cases := []struct {
 		time time.Time
@@ -116,7 +115,6 @@ func TestSVGWriterHourHand(t *testing.T) {
 		})
 	}
 }
-*/
 
 func TestSVGWriterAtMidnight(t *testing.T) {
 	tm := time.Date(1337, time.January, 1, 0, 0, 0, 0, time.UTC)
