@@ -18,4 +18,9 @@ vet:
 	@go vet -v ./...
 	@echo "Done."
 
+build:
+	@echo "Building project..."
+	@go build -o bin/learn-go-with-tests
+	@echo "Done."
+
 .PHONY: tests bench cov vet
