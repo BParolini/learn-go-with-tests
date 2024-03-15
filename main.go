@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 
 	clockface "github.com/bparolini/learn-go-with-tests/16-mathematics"
+	blogposts "github.com/bparolini/learn-go-with-tests/17-reading_files"
 )
 
 func main() {
@@ -17,6 +19,8 @@ func main() {
 	switch os.Args[1] {
 	case "clockface":
 		clockfaceMain()
+	case "reading_files":
+		readingFilesMain()
 	}
 }
 
@@ -25,6 +29,19 @@ func main() {
 func clockfaceMain() {
 	t := time.Now()
 	clockface.SVGWriter(os.Stdout, t)
+}
+
+// endregion
+
+// region reading files
+
+func readingFilesMain() {
+	posts, err := blogposts.NewPostsFromFS(os.DirFS("17-reading_files/posts"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println(posts)
 }
 
 // endregion
